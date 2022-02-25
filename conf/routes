@@ -9,7 +9,7 @@ GET     /                                controllers.HomeController.getAll
 GET     /hello/:studentId                controllers.HomeController.getById(studentId:Int)
 PUT     /hello/:id                       controllers.HomeController.markAsDone(id:Int)
 DELETE  /hello/done/:id                  controllers.HomeController.deleteAllDone(id:Int)
-POST     /hello/addItem                  controllers.HomeController.addNewItem
+POST     /hello                  controllers.HomeController.addNewItem
 
 
 

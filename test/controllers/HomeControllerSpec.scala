@@ -1,7 +1,7 @@
 package controllers
-
 import org.scalatestplus.play._
 import org.scalatestplus.play.guice._
+import play.api.Play.materializer
 import play.api.test._
 import play.api.test.Helpers._
 
@@ -33,13 +33,14 @@ class HomeControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting
       contentAsString(home) must include ("Welcome to Play")
     }
 
-    "render the index page from the router" in {
-      val request = FakeRequest(GET, "/")
-      val home = route(app, request).get
+    "should return 400 Bad Request if the Content-Type header is not set" in {
+      val todoListItemJson = "{\"description\":\"some test description\"}"
 
-      status(home) mustBe OK
-      contentType(home) mustBe Some("text/html")
-      contentAsString(home) must include ("Welcome to Play")
+      val controller = new HomeController(stubControllerComponents())
+      val addNewItem = controller.addNewItem().apply(
+        FakeRequest(POST, "/hello").withTextBody(todoListItemJson)
+      )
+      status(addNewItem) mustBe 415
     }
-  }
+    }
 }

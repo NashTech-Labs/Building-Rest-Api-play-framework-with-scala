@@ -10,6 +10,13 @@ import scala.collection.mutable
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
+
+import javax.inject._
+import models.{NewStudentItem, Student}
+import play.api.libs.json._
+import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
+import scala.collection.mutable
+
 @Singleton
 class HomeController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
@@ -73,4 +80,4 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
                     Ok(Json.toJson(studentList))
                   }
   }
-  }
+}
